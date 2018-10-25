@@ -2,8 +2,17 @@
 
 Made with React/Redux/Routes/Thunk.
 
+## How to:
 
-## Available Scripts
+1. Clone repo: `git clone https://github.com/dejsan/user-stories.git`
+2. Enter projects folder: `cd user-stories`
+3. Install modules that project uses: `npm install`
+4. Start app: `npm start`
+
+*Note:*
+*- Install Git and Node.js(Npm comes with Node.js) on your computer if you don't have them.*
+
+## Available Scripts:
 
 In the project directory, you can run:
 
