@@ -8,20 +8,17 @@ const initialState = {
         {
             id: 1, 
             title: 'Bought cool game', 
-            categorie:'Games', 
-            content:'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+            categorie:'Games'
         }, 
         {
             id: 2, 
             title: 'Great movie night', 
-            categorie:'Movies', 
-            content:'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+            categorie:'Movies' 
         }, 
         {
             id: 3, 
             title: 'Banana cake', 
-            categorie:'Food', 
-            content:'Sunt in culpa qui officia deserunt mollit anim id est laborum.'
+            categorie:'Food' 
         }
     ],
     count: 0,

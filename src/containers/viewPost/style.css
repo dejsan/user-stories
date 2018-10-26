@@ -1,0 +1,8 @@
+#post {
+    border: 1px solid #dee2e6;
+    margin-bottom: 2%;
+    padding: 2%;
+}
+    #post #content {
+        margin-top: 2%;
+    }

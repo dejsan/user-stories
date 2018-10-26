@@ -53,7 +53,7 @@ const mapDispatchToProps = dispatch =>
             decrement,
             decrementAsync,
             addPost: () => push('/add-post'),
-            viewPost: (id) => push('/view-post/' + id + '/')
+            viewPost: (id) => push('/view-post?id=' + id)
         },
         dispatch
     )
