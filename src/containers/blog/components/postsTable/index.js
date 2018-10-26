@@ -1,12 +1,12 @@
 import React from 'react'
 import Post from './post/index'
 
-const PostTable = props => {
+const PostsTable = props => {
 
     const { posts, viewPost } = props
   
     return (
-        <table class="table table-bordered">
+        <table className="table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -16,14 +16,14 @@ const PostTable = props => {
                 </tr>
             </thead>
             <tbody>
-            {
-                posts.map(function(post){
-                return <Post id={post.id} title={post.title} categorie={post.categorie} viewPost={viewPost} />
-                })
-            }
+                {
+                    posts.map(function(post, i){
+                    return <Post key={i} id={post.id} title={post.title} categorie={post.categorie} viewPost={viewPost} />
+                    })
+                }
             </tbody>
         </table>
     )
 }
   
-export default PostTable
+export default PostsTable

@@ -5,7 +5,7 @@ const TestArea = props => {
     const { count, increment, incrementAsync, isIncrementing, decrement, decrementAsync, isDecrementing, addPost } = props
   
     return (
-        <div class="testArea justify-content-center">
+        <div className="justify-content-center" id="testArea">
             <h2>For test purpose:</h2>
             <p>Test Count: {count}</p>
             <p>

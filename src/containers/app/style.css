@@ -11,19 +11,20 @@ body {
     line-height: 1.5;
 }
 
+/* Common */
+
+.centered{
+    float: none;
+    margin: 0 auto;
+}
+
 button:disabled {
     opacity: 0.5;
 }
 
-header a {
-    margin-left: 1%;
+.header {
+    margin-bottom: 4%;
 }
-
-.testArea {
-    margin: auto;
-    background-color: darkslategrey;
-    color: darkturquoise;
-    border: solid 2px black;
-    width: 250px;
-    height: 250px;
-}
+    .header h1 {
+        text-decoration: underline;
+    }

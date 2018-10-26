@@ -8,23 +8,30 @@ import {
     decrement,
     decrementAsync
 } from '../../reducers/blog'
-import PostTable from './components/postTable'
+import PostsTable from './components/postsTable'
 import TestArea from './components/testArea'
-import './index.css'
+import './style.css'
 
 const Blog = props => {
 
     const { posts, addPost, viewPost  } = props
 
     return (
-        <div>
-            <div id="blog-header">
+        <div id="blog">
+            <div className="header">
                 <h1>User Stories</h1>
-                <p>Have something new to share with the rest of the world?</p>
-                <button type="button" class="btn btn-success btn-lg" onClick={() => addPost()}>Add post</button>
             </div>
-            <div id="blog-content">
-                <PostTable posts={posts} viewPost={viewPost} />
+            <div className="content">
+                <p>Have something new to share with the rest of the world?</p>
+                <button 
+                    type="button" 
+                    className="btn btn-success btn-lg" 
+                    id="btn-addPost" 
+                    onClick={() => addPost()}
+                >
+                    Add post
+                </button>
+                <PostsTable posts={posts} viewPost={viewPost} />
                 <TestArea {...props}/>
             </div>
         </div>
@@ -46,7 +53,7 @@ const mapDispatchToProps = dispatch =>
             decrement,
             decrementAsync,
             addPost: () => push('/add-post'),
-            viewPost: () => push('/add-post')
+            viewPost: (id) => push('/view-post/' + id + '/')
         },
         dispatch
     )
