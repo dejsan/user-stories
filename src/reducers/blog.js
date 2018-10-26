@@ -1,58 +1,49 @@
-export const INCREMENT_REQUESTED = 'blog/INCREMENT_REQUESTED'
-export const INCREMENT = 'blog/INCREMENT'
-export const DECREMENT_REQUESTED = 'blog/DECREMENT_REQUESTED'
-export const DECREMENT = 'blog/DECREMENT'
+export const RECEIVE_POSTS  = 'blog/RECEIVE_POSTS '
+export const REQUEST_POSTS = 'blog/REQUEST_POSTS'
+export const CLEAR_TABLE = 'blog/CLEAR_TABLE'
+export const DELETE_POST = 'blog/DELETE_POST'
+export const REQUEST_DELETE_POST = 'blog/REQUEST_DELETE_POST'
+
+const API_URL = 'https://reduxblog.herokuapp.com/api/posts'
+const API_KEY = '?key=123'
 
 const initialState = {
-    posts: [
-        {
-            id: 1, 
-            title: 'Bought cool game', 
-            categorie:'Games'
-        }, 
-        {
-            id: 2, 
-            title: 'Great movie night', 
-            categorie:'Movies' 
-        }, 
-        {
-            id: 3, 
-            title: 'Banana cake', 
-            categorie:'Food' 
-        }
-    ],
-    count: 0,
-    isIncrementing: false,
-    isDecrementing: false
+    posts: [],
+    isRequestingPosts: false,
+    isRequestingDeletePost: false        
 }
 
 // Reducer
 export default (state = initialState, action) => {
     switch (action.type) {
-        case INCREMENT_REQUESTED:
+        case REQUEST_POSTS:
             return {
                 ...state,
-                isIncrementing: true
+                isRequestingPosts: true
             }
 
-        case INCREMENT:
+        case RECEIVE_POSTS:
             return {
                 ...state,
-                count: state.count + 1,
-                isIncrementing: !state.isIncrementing
+                posts: action.posts,
+                isRequestingPosts: false
+            }
+        case CLEAR_TABLE:
+            return {
+                ...state,
+                posts: []
             }
 
-        case DECREMENT_REQUESTED:
+        case REQUEST_DELETE_POST:
             return {
                 ...state,
-                isDecrementing: true
+                isRequestingDeletePost: true
             }
 
-        case DECREMENT:
+        case DELETE_POST:
             return {
                 ...state,
-                count: state.count - 1,
-                isDecrementing: !state.isDecrementing
+                isRequestingDeletePost: false
             }
 
         default:
@@ -61,54 +52,47 @@ export default (state = initialState, action) => {
 }
 
 // Actions
-export const increment = () => {
+const recievePosts = (posts) => {
     return dispatch => {
         dispatch({
-            type: INCREMENT_REQUESTED
-        })
-
-        dispatch({
-            type: INCREMENT
+            type: RECEIVE_POSTS,
+            posts: posts
         })
     }
 }
 
-export const incrementAsync = () => {
+export const requestPosts = () => {
     return dispatch => {
-        dispatch({
-            type: INCREMENT_REQUESTED
-        })
-
-        return setTimeout(() => {
-            dispatch({
-            type: INCREMENT
-            })
-        }, 3000)
+        dispatch({ type: REQUEST_POSTS })
+        dispatch({ type: CLEAR_TABLE })
+        return setTimeout(() => { 
+                    fetch(API_URL + API_KEY, {method: "GET"})
+                        .then(response => response.json())
+                        .then(json => dispatch(recievePosts(json)))
+                        .catch(err => dispatch({ type: 'blog/FAIL_RECIEVE_POSTS', error: err })) 
+                }, 1500)
     }
 }
 
-export const decrement = () => {
+const deletePost = (postId) => {
     return dispatch => {
         dispatch({
-            type: DECREMENT_REQUESTED
+            type: DELETE_POST,
+            postId: postId
         })
-
-        dispatch({
-            type: DECREMENT
-        })
+        return dispatch(requestPosts())
     }
 }
 
-export const decrementAsync = () => {
+export const requestDeletePost = (postId) => {
     return dispatch => {
         dispatch({
-            type: DECREMENT_REQUESTED
+            type: REQUEST_DELETE_POST
         })
 
-        return setTimeout(() => {
-            dispatch({
-            type: DECREMENT
-            })
-        }, 3000)
+        return fetch(API_URL + '/' + postId + API_KEY, {method: "DELETE"})
+                .then(response => response.json())
+                .then(json => dispatch(deletePost(postId)))
+                .catch(err => dispatch({ type: 'blog/FAIL_RECIEVE_POSTS', error: err }))
     }
 }
