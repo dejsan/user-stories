@@ -69,7 +69,7 @@ export const requestPosts = () => {
                         .then(response => response.json())
                         .then(json => dispatch(recievePosts(json)))
                         .catch(err => dispatch({ type: 'blog/FAIL_RECIEVE_POSTS', error: err })) 
-                }, 1500)
+                }, 1000)
     }
 }
 

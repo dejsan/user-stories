@@ -47,6 +47,6 @@ export const requestPost = (postId) => {
                         .then(response => response.json())
                         .then(json => dispatch(recievePost(json)))
                         .catch(err => dispatch({ type: 'viewPost/FAIL_RECIEVE_POSTS', error: err })) 
-                }, 1000)
+                }, 500)
     }
 }
