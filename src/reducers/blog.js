@@ -1,11 +1,10 @@
+import * as constants from './constants';
+
 export const RECEIVE_POSTS  = 'blog/RECEIVE_POSTS '
 export const REQUEST_POSTS = 'blog/REQUEST_POSTS'
 export const CLEAR_TABLE = 'blog/CLEAR_TABLE'
 export const DELETE_POST = 'blog/DELETE_POST'
 export const REQUEST_DELETE_POST = 'blog/REQUEST_DELETE_POST'
-
-const API_URL = 'https://reduxblog.herokuapp.com/api/posts'
-const API_KEY = '?key=123'
 
 const initialState = {
     posts: [],
@@ -66,7 +65,7 @@ export const requestPosts = () => {
         dispatch({ type: REQUEST_POSTS })
         dispatch({ type: CLEAR_TABLE })
         return setTimeout(() => { 
-                    fetch(API_URL + API_KEY, {method: "GET"})
+                    fetch(constants.API_URL + constants.API_KEY, {method: "GET"})
                         .then(response => response.json())
                         .then(json => dispatch(recievePosts(json)))
                         .catch(err => dispatch({ type: 'blog/FAIL_RECIEVE_POSTS', error: err })) 
@@ -90,7 +89,7 @@ export const requestDeletePost = (postId) => {
             type: REQUEST_DELETE_POST
         })
 
-        return fetch(API_URL + '/' + postId + API_KEY, {method: "DELETE"})
+        return fetch(constants.API_URL + '/' + postId + constants.API_KEY, {method: "DELETE"})
                 .then(response => response.json())
                 .then(json => dispatch(deletePost(postId)))
                 .catch(err => dispatch({ type: 'blog/FAIL_RECIEVE_POSTS', error: err }))

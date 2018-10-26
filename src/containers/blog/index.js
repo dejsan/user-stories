@@ -68,7 +68,7 @@ const mapDispatchToProps = dispatch =>
             requestPosts,
             requestDeletePost,
             addPost: () => push('/add-post'),
-            viewPost: (id) => push('/view-post?id=' + id)
+            viewPost: (id) => push('/view-post/' + id)
         },
         dispatch
     )

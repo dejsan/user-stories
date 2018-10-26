@@ -1,3 +1,5 @@
+import * as constants from './constants';
+
 export const INCREMENT_REQUESTED = 'addPost/INCREMENT_REQUESTED'
 export const INCREMENT = 'addPost/INCREMENT'
 
