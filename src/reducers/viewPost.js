@@ -42,11 +42,9 @@ const recievePost = (postData) => {
 export const requestPost = (postId) => {
     return dispatch => {
         dispatch({ type: REQUEST_POST })
-        return setTimeout(() => { 
-                    fetch(constants.API_URL + '/' + postId + constants.API_KEY, {method: "GET"})
-                        .then(response => response.json())
-                        .then(json => dispatch(recievePost(json)))
-                        .catch(err => dispatch({ type: 'viewPost/FAIL_RECIEVE_POSTS', error: err })) 
-                }, 500)
+        return fetch(constants.API_URL + '/' + postId + constants.API_KEY, {method: "GET"})
+                .then(response => response.json())
+                .then(json => dispatch(recievePost(json)))
+                .catch(err => dispatch({ type: 'viewPost/FAIL_RECIEVE_POSTS', error: err })) 
     }
 }

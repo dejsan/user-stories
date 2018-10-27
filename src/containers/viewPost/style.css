@@ -1,8 +1,18 @@
+#viewPost .content {
+    padding-bottom: 2%;
+}
+
 #post {
+    background-color: white;
     border: 1px solid #dee2e6;
     margin-bottom: 2%;
     padding: 2%;
 }
+    #post #title h2{
+    }
     #post #content {
         margin-top: 2%;
+    }
+    #post #categories {
+        color: darkcyan;
     }

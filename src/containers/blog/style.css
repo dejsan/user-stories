@@ -1,12 +1,11 @@
-#blog #testArea {
-    margin: auto;
-    background-color: darkslategrey;
-    color: darkturquoise;
-    border: solid 2px black;
-    width: 250px;
-    height: 250px;
+#blog .content {
+    margin-top: 10%;
 }
 
 #blog #btn-addPost {
     margin-bottom: 2%;
+}
+
+#blog table {
+    background-color: white;
 }

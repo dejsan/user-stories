@@ -3,7 +3,7 @@ import Post from './post/index'
 
 const PostsTable = props => {
 
-    const { posts, viewPost, requestDeletePost, isRequestingDeletePost } = props
+    const { posts, goToViewPost, requestDeletePost, isRequestingDeletePost } = props
   
     return (
         <table className="table table-bordered">
@@ -23,7 +23,7 @@ const PostsTable = props => {
                                     id={post.id} 
                                     title={post.title} 
                                     categorie={post.categorie} 
-                                    viewPost={viewPost} 
+                                    goToViewPost={goToViewPost} 
                                     requestDeletePost={requestDeletePost}
                                     isRequestingDeletePost={isRequestingDeletePost}
                                 />

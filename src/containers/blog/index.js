@@ -18,12 +18,12 @@ class Blog extends React.Component {
         requestPosts()
     }
     render(){
-        const { requestPosts, isRequestingPosts, requestDeletePost, isRequestingDeletePost, posts, addPost, viewPost  } = this.props
+        const { requestPosts, isRequestingPosts, requestDeletePost, isRequestingDeletePost, posts, goToAddPost, goToViewPost  } = this.props
         
         return (
             <div id="blog">
                 <div className="header">
-                    <h1><span style={{fontSize:'12px'}}>ćiraM najeD yb</span>User Stories<span style={{fontSize:'12px'}}>by Dejan Marić</span></h1>
+                    <h1>User Stories</h1>
                 </div>
                 <div className="content">
                     <div className="row">
@@ -36,14 +36,14 @@ class Blog extends React.Component {
                             <p>Have something new to share with the rest of the world?</p>
                         </div>
                         <div className="col-md-4">
-                            <button type="button" className="btn btn-success btn-lg" id="btn-addPost" onClick={() => addPost()}>
+                            <button type="button" className="btn btn-success btn-lg" id="btn-addPost" onClick={() => goToAddPost()}>
                                 Add Post
                             </button>
                         </div>
                     </div>
                     <PostsTable 
                         posts={posts}
-                        viewPost={viewPost}
+                        goToViewPost={goToViewPost}
                         requestDeletePost={requestDeletePost}
                         isRequestingDeletePost={isRequestingDeletePost}
                     />
@@ -67,8 +67,8 @@ const mapDispatchToProps = dispatch =>
         {
             requestPosts,
             requestDeletePost,
-            addPost: () => push('/add-post'),
-            viewPost: (id) => push('/view-post/' + id)
+            goToAddPost: () => push('/add-post'),
+            goToViewPost: (id) => push('/view-post/' + id)
         },
         dispatch
     )

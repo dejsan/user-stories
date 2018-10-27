@@ -8,7 +8,7 @@ const Post = props => {
         <div className="container" id="post">
             {
                 isRequestingPost ? 
-                    <div className="row justify-content-md-center" id="title">
+                    <div className="row justify-content-md-center">
                         <div className="col-md-8">
                             <h2>Loading...</h2>
                         </div>
@@ -21,9 +21,9 @@ const Post = props => {
                                 <h2>{title}</h2>
                             </div>
                         </div>
-                        <div className="row justify-content-md-center" id="categorie">
+                        <div className="row justify-content-md-center" id="categories">
                             <div className="col-md-8">
-                                <h4>{categories}</h4>
+                                <p>{categories}</p>
                             </div>
                         </div>
                         <div className="row justify-content-md-center" id="content">

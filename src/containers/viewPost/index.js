@@ -18,16 +18,16 @@ class ViewPost extends React.Component {
         requestPost(this.postId)
     }
     render(){
-        const { postData, isRequestingPost, goBack } = this.props
+        const { postData, isRequestingPost, goToBlog } = this.props
 
         return (
-            <div id="addPost">
+            <div id="viewPost">
                 <div className="header">
                     <h1>View Post</h1>
                 </div>
                 <div className="content">
                     <Post postData={postData} isRequestingPost={isRequestingPost} />
-                    <button type="button" className="btn btn-lg btn-warning" onClick={() => goBack()}>Go Back</button>
+                    <button type="button" className="btn btn-lg btn-warning" onClick={() => goToBlog()}>Go Back</button>
                 </div>
             </div>
         )
@@ -43,7 +43,7 @@ const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
             requestPost,
-            goBack: () => push('/')
+            goToBlog: () => push('/')
         },
         dispatch
     )

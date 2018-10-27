@@ -1,26 +1,36 @@
 import * as constants from './constants';
 
-export const INCREMENT_REQUESTED = 'addPost/INCREMENT_REQUESTED'
-export const INCREMENT = 'addPost/INCREMENT'
+export const REQUEST_ADD_POST = 'addPost/REQUEST_ADD_POST'
+export const SUCCESSFUL_ADD_POST = 'addPost/SUCCESSFUL_ADD_POST'
+export const RESET_STATE = 'addPost/RESET_STATE'
 
 const initialState = {
-    formData: {}
+    isRequestingAddPost: false,
+    isAddPostSuccessful: false
 }
 
 // Reducer
 export default (state = initialState, action) => {
     switch (action.type) {
-        case INCREMENT_REQUESTED:
+        case REQUEST_ADD_POST:
             return {
                 ...state,
-                isIncrementing: true
+                isRequestingAddPost: true,
+                isAddPostSuccessful: false
             }
 
-        case INCREMENT:
+        case SUCCESSFUL_ADD_POST:
             return {
                 ...state,
-                count: state.count + 1,
-                isIncrementing: !state.isIncrementing
+                isRequestingAddPost: false,
+                isAddPostSuccessful: true
+            }
+
+        case RESET_STATE:
+            return {
+                ...state,
+                isRequestingAddPost: false,
+                isAddPostSuccessful: false
             }
 
         default:
@@ -29,28 +39,41 @@ export default (state = initialState, action) => {
 }
 
 // Actions
-export const increment = () => {
+const successfulAddPost = () => {
     return dispatch => {
         dispatch({
-            type: INCREMENT_REQUESTED
-        })
-
-        dispatch({
-            type: INCREMENT
+            type: SUCCESSFUL_ADD_POST
         })
     }
 }
 
-export const incrementAsync = () => {
+export const resetAddFormState = () => {
     return dispatch => {
         dispatch({
-            type: INCREMENT_REQUESTED
+            type: RESET_STATE
         })
+    }
+}
 
-        return setTimeout(() => {
-            dispatch({
-            type: INCREMENT
-            })
-        }, 3000)
+export const requestAddPost = (postData) => {
+    return dispatch => {
+        dispatch({ type: REQUEST_ADD_POST })
+        return fetch(constants.API_URL + constants.API_KEY, 
+                    {
+                        method: "POST",
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: postData
+                    }
+                )
+                .then(response => response.json())
+                .then(json => {
+                    document.getElementById("addForm").reset();
+                    dispatch(successfulAddPost())
+                })
+                .catch(err => dispatch({ type: 'addPost/FAIL_ADD_POST', error: err })) 
+                
     }
 }

@@ -3,38 +3,50 @@ import { push } from 'connected-react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {
-    increment,
-    incrementAsync
+    resetAddFormState,
+    requestAddPost
 } from '../../reducers/addPost'
 import AddForm from './components/addForm'
 import './style.css'
 
-const addPost = props => {
+class AddPost extends React.Component {
+    constructor(props) {
+        super(props)
+    }
 
-    const { cancel } = props
+    render(){
+        const { resetAddFormState, goToBlog, requestAddPost, isRequestingAddPost, isAddPostSuccessful } = this.props
 
-    return (
-        <div id="addPost">
-            <div className="header">
-                <h1>Add Post</h1>
+        return (
+            <div id="addPost">
+                <div className="header">
+                    <h1>Add Post</h1>
+                </div>
+                <div className="content">
+                    <AddForm
+                        resetAddFormState={resetAddFormState}
+                        goToBlog={goToBlog}
+                        requestAddPost={requestAddPost}
+                        isRequestingAddPost={isRequestingAddPost}
+                        isAddPostSuccessful={isAddPostSuccessful}
+                    />
+                </div>
             </div>
-            <div className="content">
-                <AddForm cancel={cancel} />
-            </div>
-        </div>
-    )
+        )
+    }
 }
 
 const mapStateToProps = ({ addPost }) => ({
-    posts: addPost.formData
+    isRequestingAddPost: addPost.isRequestingAddPost,
+    isAddPostSuccessful: addPost.isAddPostSuccessful
 })
 
 const mapDispatchToProps = dispatch =>
     bindActionCreators(
         {
-            increment,
-            incrementAsync,
-            cancel: () => push('/')
+            requestAddPost,
+            resetAddFormState,
+            goToBlog: () => push('/')
         },
         dispatch
     )
@@ -42,4 +54,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(addPost)
+)(AddPost)

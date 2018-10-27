@@ -64,12 +64,10 @@ export const requestPosts = () => {
     return dispatch => {
         dispatch({ type: REQUEST_POSTS })
         dispatch({ type: CLEAR_TABLE })
-        return setTimeout(() => { 
-                    fetch(constants.API_URL + constants.API_KEY, {method: "GET"})
-                        .then(response => response.json())
-                        .then(json => dispatch(recievePosts(json)))
-                        .catch(err => dispatch({ type: 'blog/FAIL_RECIEVE_POSTS', error: err })) 
-                }, 1000)
+        return fetch(constants.API_URL + constants.API_KEY, {method: "GET"})
+                .then(response => response.json())
+                .then(json => dispatch(recievePosts(json)))
+                .catch(err => dispatch({ type: 'blog/FAIL_RECIEVE_POSTS', error: err })) 
     }
 }
 
