@@ -33,7 +33,7 @@ class AddForm extends React.Component {
             <form id='addForm' className='container' onSubmit={this.handleSubmit}>
                 { isAddPostSuccessful &&
                     <div className='row justify-content-md-center'>
-                        <div class='alert alert-success col-lg-6'>
+                        <div className='alert alert-success col-lg-6'>
                             <strong>Success!</strong>
                         </div>
                     </div>
